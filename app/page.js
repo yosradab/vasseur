@@ -1,7 +1,6 @@
 import Link from "next/link";
 import Image from "next/image";
 import SlateDivider from "@/components/SlateDivider";
-import { RoofIllustration, ArtisanIllustration } from "@/components/RoofArt";
 import QuoteBlock from "@/components/QuoteBlock";
 import Faq from "@/components/Faq";
 import { SITE, COMMUNES, PRESTATIONS } from "@/lib/site";
@@ -91,8 +90,9 @@ const faqItems = [
 export default function HomePage() {
   return (
     <>
-      <section className="relative bg-navy overflow-hidden">
-        <div className="mx-auto max-w-6xl px-5 pt-16 pb-20 md:pt-24 md:pb-28 grid gap-12 md:grid-cols-[1.1fr_0.9fr] items-center">
+      <section className="relative bg-[url('/hero-bg.jpg')] bg-cover bg-center bg-blend-overlay bg-navy/85 overflow-hidden">
+        <div className="absolute inset-0 bg-noise mix-blend-overlay opacity-50 pointer-events-none"></div>
+        <div className="mx-auto max-w-6xl px-5 pt-16 pb-20 md:pt-24 md:pb-28 grid gap-12 md:grid-cols-[1.1fr_0.9fr] items-center relative z-10">
           <div>
             <p className="text-blue-bright text-sm font-medium tracking-wide mb-4">
               Angers et Maine-et-Loire (49)
@@ -156,19 +156,19 @@ export default function HomePage() {
           De la petite réparation à la toiture entièrement refaite, la même équipe suit le
           chantier du premier appel à la dernière ardoise.
         </p>
-        <div className="grid sm:grid-cols-2 gap-px bg-slate/15">
+        <div className="grid sm:grid-cols-2 gap-6">
           {PRESTATIONS.map((p) =>
             p.hasPage ? (
               <Link
                 key={p.slug}
                 href={`/${p.slug}`}
-                className="bg-paper p-6 hover:bg-stone transition-colors"
+                className="bg-paper p-6 rounded-xl shadow-sm hover:shadow-md transition-shadow border border-slate/10"
               >
                 <h3 className="font-display text-xl text-ink mb-2">{p.title}</h3>
                 <p className="text-sm text-slate leading-relaxed">{p.short}</p>
               </Link>
             ) : (
-              <div key={p.slug} className="bg-paper p-6">
+              <div key={p.slug} className="bg-paper p-6 rounded-xl shadow-sm border border-slate/10">
                 <h3 className="font-display text-xl text-ink mb-2">{p.title}</h3>
                 <p className="text-sm text-slate leading-relaxed">{p.short}</p>
               </div>
@@ -216,11 +216,11 @@ export default function HomePage() {
         <h2 className="font-display text-3xl md:text-4xl text-ink mb-10">Chantiers récents</h2>
         <div className="grid sm:grid-cols-2 gap-8">
           {chantiers.map((c, i) => (
-            <div key={c.title}>
-              <div className="aspect-[16/10] mb-4 overflow-hidden">
-                <RoofIllustration variant={i} className="w-full h-full" />
+            <div key={c.title} className="group cursor-pointer">
+              <div className="aspect-[16/10] mb-4 overflow-hidden rounded-xl relative shadow-sm group-hover:shadow-md transition-shadow">
+                <Image src={`/chantier-${(i % 2) + 1}.jpg`} alt={c.title} fill className="object-cover transition-transform duration-700 group-hover:scale-105" />
               </div>
-              <h3 className="font-medium text-ink mb-1">{c.title}</h3>
+              <h3 className="font-medium text-ink mb-1 group-hover:text-blue transition-colors">{c.title}</h3>
               <p className="text-sm text-slate leading-relaxed">{c.text}</p>
             </div>
           ))}
@@ -229,10 +229,11 @@ export default function HomePage() {
 
       <SlateDivider tone="navy" />
 
-      <section className="bg-navy">
-        <div className="mx-auto max-w-6xl px-5 py-16 md:py-24 grid md:grid-cols-[0.8fr_1.2fr] gap-10 items-center">
-          <div className="aspect-square overflow-hidden">
-            <ArtisanIllustration className="w-full h-full" />
+      <section className="bg-navy relative">
+        <div className="absolute inset-0 bg-noise mix-blend-overlay opacity-50 pointer-events-none"></div>
+        <div className="mx-auto max-w-6xl px-5 py-16 md:py-24 grid md:grid-cols-[0.8fr_1.2fr] gap-10 items-center relative z-10">
+          <div className="aspect-square overflow-hidden rounded-2xl relative shadow-xl">
+            <Image src="/artisan.jpg" alt="Julien Vasseur, sur le toit" fill className="object-cover" />
           </div>
           <div>
             <h2 className="font-display text-3xl md:text-4xl text-white mb-4">

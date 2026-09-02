@@ -66,8 +66,9 @@ const faqItems = [
 export default function PrestationArdoise() {
   return (
     <>
-      <section className="bg-navy">
-        <div className="mx-auto max-w-4xl px-5 pt-16 pb-14 md:pt-24">
+      <section className="relative bg-[url('/hero-bg.jpg')] bg-cover bg-center bg-blend-overlay bg-navy/85 overflow-hidden">
+        <div className="absolute inset-0 bg-noise mix-blend-overlay opacity-50 pointer-events-none"></div>
+        <div className="mx-auto max-w-4xl px-5 pt-16 pb-14 md:pt-24 relative z-10">
           <p className="text-blue-bright text-sm font-medium mb-4">Prestation — Angers et Maine-et-Loire</p>
           <h1 className="font-display text-4xl sm:text-5xl text-white leading-[1.05] mb-6">
             Réfection de toiture en ardoise à Angers
